@@ -3,15 +3,19 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     [Header("Config in editor")]
-    [SerializeField] float xValues = 0;
-    [SerializeField] float yValues = 0;
-    [SerializeField] float zValues = 0;
-    void Start()
-    {
-        
-    }
+    [SerializeField] float speed = 10;
+    [SerializeField] Vector3 input = Vector3.zero;
     void Update()
     {
-        transform.Translate(xValues, yValues, zValues);
+        input.x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        input.y = 0;
+        input.z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        transform.Translate(input);
+        //if(input != Vector3.zero)
+        //{
+            
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(input), Time.deltaTime * 5f);
+        //}
+            
     }
 }
